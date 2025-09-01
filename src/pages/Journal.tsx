@@ -83,10 +83,10 @@ const Journal = () => {
     if (!content.trim()) return;
 
     // Check entry limits for free users
-    if (profile?.subscription_tier === 'free' && todayEntryCount >= 1) {
+    if (profile?.subscription_tier === 'free' && todayEntryCount >= 5) {
       toast({
         title: "Entry limit reached",
-        description: "Free users can only create 1 entry per day. Upgrade to Premium for unlimited entries.",
+        description: "Free users can only create 5 entries per day. Upgrade to Premium for unlimited entries.",
         variant: "destructive",
       });
       return;
@@ -132,7 +132,7 @@ const Journal = () => {
     }
   };
 
-  const canAddEntry = profile?.subscription_tier === 'premium' || todayEntryCount < 1;
+  const canAddEntry = profile?.subscription_tier === 'premium' || todayEntryCount < 5;
 
   return (
     <div className="min-h-screen bg-background">
@@ -154,7 +154,7 @@ const Journal = () => {
             <CardHeader>
               <CardTitle className="text-destructive">Daily Entry Limit Reached</CardTitle>
               <CardDescription>
-                You've reached your daily limit of 1 entry. Upgrade to Premium for unlimited entries.
+                You've reached your daily limit of 5 entries. Upgrade to Premium for unlimited entries.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -206,7 +206,7 @@ const Journal = () => {
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-primary">
-                      {profile?.subscription_tier === 'premium' ? '∞' : '1'}
+                      {profile?.subscription_tier === 'premium' ? '∞' : '5'}
                     </div>
                     <div className="text-sm text-muted-foreground">Daily Limit</div>
                   </div>
