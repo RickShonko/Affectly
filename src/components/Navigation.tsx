@@ -4,6 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Brain, Heart, BookOpen, BarChart3, Settings, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const Navigation = () => {
   const { user, signOut } = useAuth();
@@ -45,6 +46,8 @@ const Navigation = () => {
                 {item.label}
               </Link>
             ))}
+            
+            <ThemeToggle />
             
             <Button variant="ghost" onClick={signOut} className="flex items-center gap-2">
               <LogOut className="h-4 w-4" />
