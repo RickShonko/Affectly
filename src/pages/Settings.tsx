@@ -15,12 +15,53 @@ const Settings = () => {
   const [profile, setProfile] = useState<any>(null);
   const [fullName, setFullName] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isUpgrading, setIsUpgrading] = useState(false);
 
   useEffect(() => {
     if (user) {
       fetchProfile();
     }
+    
+    // Check for payment success/failure from URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentStatus = urlParams.get('payment');
+    const reference = urlParams.get('reference');
+    
+    if (paymentStatus === 'success' && reference) {
+      verifyPayment(reference);
+    }
   }, [user]);
+
+  const verifyPayment = async (reference: string) => {
+    try {
+      const { data, error } = await supabase.functions.invoke('verify-payment', {
+        body: { reference }
+      });
+
+      if (error || !data.success) {
+        throw new Error(data?.error || 'Payment verification failed');
+      }
+
+      toast({
+        title: "Payment Successful!",
+        description: "Your subscription has been upgraded to Premium.",
+      });
+
+      // Refresh profile to show updated subscription
+      fetchProfile();
+      
+      // Clean URL
+      window.history.replaceState({}, document.title, '/settings');
+      
+    } catch (error) {
+      console.error('Payment verification error:', error);
+      toast({
+        title: "Payment Verification Failed",
+        description: "Please contact support if payment was deducted.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const fetchProfile = async () => {
     if (!user) return;
@@ -68,17 +109,43 @@ const Settings = () => {
     }
   };
 
-  const handleUpgrade = () => {
-    toast({
-      title: "Coming soon!",
-      description: "Stripe integration will be added next. You'll be able to upgrade to Premium here.",
-    });
+  const handleUpgrade = async () => {
+    if (!user?.email) return;
+
+    try {
+      setIsUpgrading(true);
+      
+      const { data, error } = await supabase.functions.invoke('paystack-payment', {
+        body: {
+          email: user.email,
+          amount: 600, // 600 KES
+          callback_url: `${window.location.origin}/settings?payment=success`
+        }
+      });
+
+      if (error || !data.success) {
+        throw new Error(data?.error || 'Payment initialization failed');
+      }
+
+      // Redirect to Paystack payment page
+      window.location.href = data.data.authorization_url;
+      
+    } catch (error) {
+      console.error('Payment error:', error);
+      toast({
+        title: "Payment Error",
+        description: "Failed to initialize payment. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsUpgrading(false);
+    }
   };
 
   const handleManageSubscription = () => {
     toast({
-      title: "Coming soon!",
-      description: "Subscription management portal will be available here.",
+      title: "Subscription Management",
+      description: "Contact support to manage your subscription.",
     });
   };
 
@@ -265,7 +332,7 @@ const Settings = () => {
                   <div className="space-y-2">
                     <h4 className="font-medium">Current Plan Features:</h4>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• {isPremium ? "Unlimited" : "1"} journal entry per day</li>
+                      <li>• {isPremium ? "Unlimited" : "5"} journal entries per day</li>
                       <li>• {isPremium ? "Advanced" : "Basic"} sentiment analysis</li>
                       {isPremium && (
                         <>
@@ -289,15 +356,16 @@ const Settings = () => {
                   ) : (
                     <div className="space-y-2">
                       <div className="text-center">
-                        <div className="text-2xl font-bold">$9.99</div>
+                        <div className="text-2xl font-bold">KES 600</div>
                         <div className="text-sm text-muted-foreground">per month</div>
                       </div>
                       <Button 
                         className="w-full"
                         onClick={handleUpgrade}
+                        disabled={isUpgrading}
                       >
                         <Crown className="h-4 w-4 mr-2" />
-                        Upgrade to Premium
+                        {isUpgrading ? "Processing..." : "Upgrade to Premium"}
                       </Button>
                     </div>
                   )}
