@@ -118,7 +118,7 @@ const Settings = () => {
       const { data, error } = await supabase.functions.invoke('paystack-payment', {
         body: {
           email: user.email,
-          amount: 600, // 600 KES
+          amount: 100, // 100 KES
           callback_url: `${window.location.origin}/settings?payment=success`
         }
       });
@@ -356,7 +356,7 @@ const Settings = () => {
                   ) : (
                     <div className="space-y-2">
                       <div className="text-center">
-                        <div className="text-2xl font-bold">KES 600</div>
+                        <div className="text-2xl font-bold">KES 100</div>
                         <div className="text-sm text-muted-foreground">per month</div>
                       </div>
                       <Button 
