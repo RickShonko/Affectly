@@ -1,18 +1,55 @@
-# Welcome to your Lovable project
+# Welcome to the Affectly Mood Journal
+
+**URL**:https://affectly-journal.vercel.app
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/1025017f-ccc1-4a76-916f-0c54ff0bd3b1
+Affectly 🧠💙
+
+AI-powered Mood Journal & Emotion Tracker
+
+Affectly is a web app that helps students and young people track, understand, and improve their mental well-being. By combining journaling with AI-driven sentiment analysis (powered by Hugging Face), Affectly provides personalized insights, emotional trends, and actionable reflections.
+
+✨ Features
+
+📓 Mood Journal – Write daily entries and reflect on your thoughts.
+
+🤖 AI Sentiment Analysis – Real-time emotional insights powered by Hugging Face API.
+
+📊 Emotion Dashboard – Visualize your mood trends over time.
+
+💳 Payment Integration – Secure subscriptions via Paystack (free & premium models).
+
+🔒 Secure & Private – Data stored safely with Supabase.
+
+🛠️ Tech Stack
+
+⚡ Frontend: Vite + TypeScript + React
+
+🗄️ Backend/Database: Supabase (Auth + Edge Functions)
+
+🤖 AI: Hugging Face Sentiment Analysis
+
+💳 Payments: Paystack
+
+🌐 Deployment: Vercel
+
+## URL:
+https://affectly-journal.vercel.app
+
+## PITCH DECK
+Canva link: https://www.canva.com/design/DAGxu9ZehbU/w9ui39WvdTcJM1RA4g6rew/edit?utm_content=DAGxu9ZehbU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+## DEPLOYMENT LINK
+Link: https://affectly-journal.vercel.app/
+
+## VIDEO DEMO
+link: https://youtu.be/v08s_fu8ajU
 
 ## How can I edit this code?
 
-There are several ways of editing your application.
+There are several ways of editing the application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/1025017f-ccc1-4a76-916f-0c54ff0bd3b1) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
 
 **Use your preferred IDE**
 
@@ -60,14 +97,6 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## 🙏 Acknowledgments
 
-Simply open [Lovable](https://lovable.dev/projects/1025017f-ccc1-4a76-916f-0c54ff0bd3b1) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project was developed as part of my training with the Nachu TVC. Their guidance and resources have been instrumental in shaping Affectly.
