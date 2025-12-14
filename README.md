@@ -99,4 +99,4 @@ This project is built with:
 
 ## 🙏 Acknowledgments
 
-This project was developed as part of my training with the Nachu TVC. Their guidance and resources have been instrumental in shaping Affectly.
+Made with 💙 for  the Octopus Hackathon 2025
