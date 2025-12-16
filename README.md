@@ -44,7 +44,7 @@ Canva link: https://www.canva.com/design/DAGxu9ZehbU/w9ui39WvdTcJM1RA4g6rew/edit
 Link: https://affectly-journal.vercel.app/
 
 ## VIDEO DEMO
-link: https://youtu.be/v08s_fu8ajU
+link: https://youtu.be/v_TymZpv76E
 
 ## How can I edit this code?
 
